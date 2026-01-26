@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="Game_Launcher.Views.Games"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Game_Launcher.Views"
+             xmlns:viewmodels="clr-namespace:Game_Launcher.ViewModels"
+             xmlns:views="clr-namespace:Game_Launcher.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <UserControl.Resources>
+        <DataTemplate x:Name="DeadWrongViewTemplate" DataType="{x:Type viewmodels:DeadWrongViewModel}">
+            <views:DeadWrong DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="CubicalViewTemplate" DataType="{x:Type viewmodels:CubicalViewModel}">
+            <views:Cubical DataContext="{Binding}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+       
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ContentControl Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Grid.RowSpan="1" Content="{Binding}"/>
+
+        <Grid Margin="0,0,0,0" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="1"  Background="#FF141C25" Name="GamesGrid">
+
+            <StackPanel Margin="0,0,0,0" Orientation="Vertical">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type RadioButton}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="Gray"/>
+                        <Setter Property="GroupName" Value="GamesButtons"/>
+                        <Setter Property="FontWeight" Value="Normal"/>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="Margin" Value="0,0,0,0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type RadioButton}">
+                                    <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Rectangle Name="indicator1" HorizontalAlignment="Left" Width="3" Height="25" Grid.ColumnSpan="2" Margin="0,0,0,0"/>
+
+                                            <TextBlock x:Name="gameName" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Grid.Column="1" Text="{TemplateBinding Content}" TextTrimming="WordEllipsis" Foreground="{TemplateBinding Foreground}" FontWeight="{TemplateBinding FontWeight}" FontSize="{TemplateBinding FontSize}"/>
+                                        </Grid>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter TargetName="indicator1" Property="Shape.Fill" Value="#148eff"/>
+                                            <Setter TargetName="gameName" Property="Foreground" Value="White"/>
+                                        </Trigger>
+
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard SpeedRatio="5">
+                                                        <ColorAnimation Storyboard.TargetProperty="(RadioButton.Foreground).Color" From="Gray" To="White"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                            <Trigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard SpeedRatio="5">
+                                                        <ColorAnimation Storyboard.TargetProperty="(RadioButton.Foreground).Color" From="White" To="Gray"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.ExitActions>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </StackPanel.Resources>
+
+                <RadioButton Content="Dead Wrong" Click="DeadWrongButton_Click" IsChecked="True"/>
+                <RadioButton Content="Cubical" Click="CubicalButton_Click" Margin="0,10,0,0"/>
+
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
