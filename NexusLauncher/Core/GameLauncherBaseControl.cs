@@ -1,5 +1,4 @@
-﻿
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Game_Launcher.Core
@@ -9,6 +8,7 @@ namespace Game_Launcher.Core
     {
         // Return null here; Cubical will override with actual controls
         public override Button PlayButton => null;
+        public override Button LocateButton => null;
         public override Button OptionButton => null;
         public override ProgressBar ProgressBar => null;
         public override TextBlock ProgressLabel => null;

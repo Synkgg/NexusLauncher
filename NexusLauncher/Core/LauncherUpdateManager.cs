@@ -8,7 +8,7 @@ namespace Game_Launcher.Core
     {
         // 🔧 Change this when you release a new launcher
         public static readonly Version CurrentVersion =
-            new Version("1.0.0");
+            new Version("1.0.2");
 
         // 🔗 Server version file
         private const string VersionUrl =

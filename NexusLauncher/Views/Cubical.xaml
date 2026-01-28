@@ -14,7 +14,7 @@
                    Height="30" Width="400" VerticalAlignment="Top" HorizontalAlignment="Center"
                    TextAlignment="Center" Margin="0,10,0,0"/>
 
-        <Button Name="Play_Button" Content="PLAY" Click="PlayButton_Click" FontSize="20" FontWeight="Normal" Foreground="White" HorizontalAlignment="Left" Margin="20,0,0,10" VerticalAlignment="Bottom" Background="#FF006DFF" Height="70">
+        <Button Name="Play_Button" Content="PLAY" Click="PlayButton_Click" FontSize="20" FontWeight="Normal" Foreground="White" HorizontalAlignment="Left" Margin="20,0,0,20" VerticalAlignment="Bottom" Background="#FF006DFF" Height="70">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Background" Value="#FF006DFF"/>
@@ -36,28 +36,54 @@
 
         </Button>
 
+        <Button x:Name="Locate_Button"
+    Content="Already installed? Locate the game."
+    FontSize="12"
+    Margin="15,0,0,0"
+    Background="Transparent"
+    BorderThickness="0"
+    Foreground="LightGray"
+    Cursor="Hand"
+    Visibility="Collapsed"
+    Click="LocateButton_Click"
+    Width="200" Height="25"
+    VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+
         <Button x:Name="OptionsButton" Content="⋮"
         FontSize="25" Width="40" Height="40"
         HorizontalAlignment="Left" VerticalAlignment="Bottom"
-        Margin="205,0,0,24"
+        Margin="205,0,0,34"
         Background="Transparent"
         BorderThickness="0"
         FontWeight="Normal" Foreground="White"
         Click="OptionsButton_Click">
             <Button.ContextMenu>
-                <ContextMenu x:Name="OptionsMenu">
-                    <MenuItem Header="Verify Game Files" Click="VerifyGameFiles_Click"/>
-                    <MenuItem Header="Uninstall" Click="Uninstall_Click"/>
+                <ContextMenu Style="{StaticResource LauncherContextMenuStyle}" x:Name="OptionsMenu">
+                    <MenuItem Header="Verify Game Files"
+        Style="{StaticResource LauncherMenuItemStyleText}"
+        Click="VerifyGameFiles_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/Images/Icons/settings.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                    <MenuItem Header="Uninstall"
+        Style="{StaticResource LauncherMenuItemStyleText}"
+        Click="Uninstall_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/Images/Icons/settings.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </ContextMenu>
             </Button.ContextMenu>
         </Button>
 
         <ProgressBar x:Name="Download_ProgressBar" Height="20" Width="437"
-                     Foreground="#DD67FF15" Background="#0074e0" Margin="266,0,0,32"
+                     Foreground="#DD67FF15" Background="#0074e0" Margin="266,0,0,42"
                      VerticalAlignment="Bottom" HorizontalAlignment="Left" Visibility="Hidden"/>
 
         <TextBlock x:Name="Progress_Label" Text="%0" Height="16" Width="62"
-                   Foreground="#DDFFFFFF" Margin="430,0,0,34"
+                   Foreground="#DDFFFFFF" Margin="430,0,0,44"
                    VerticalAlignment="Bottom" HorizontalAlignment="Left"
                    FontFamily="Arial" FontSize="15" TextAlignment="Center" Visibility="Hidden"/>
     </Grid>

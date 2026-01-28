@@ -59,10 +59,16 @@ namespace Game_Launcher
 
         private void btnFullscreen_Click(object sender, RoutedEventArgs e)
         {
-            if (WindowState == WindowState.Maximized)
-                WindowState = WindowState.Normal;
-            else
-                WindowState = WindowState.Maximized;
+            //if (WindowState == WindowState.Maximized)
+            //{
+            //    WindowState = WindowState.Normal;
+            //    btnFullscreen.Content = "🗖";
+            //}
+            //else
+            //{
+            //    WindowState = WindowState.Maximized;
+            //    btnFullscreen.Content = "🗗";
+            //}
         }
         
         private void NewsButton_Click(Object sender, RoutedEventArgs e)
@@ -86,7 +92,11 @@ namespace Game_Launcher
 
         private void Settings_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            System.Windows.MessageBox.Show("Settings");
+            var settings = new Views.SettingsWindow
+            {
+                Owner = this
+            };
+            settings.ShowDialog();
         }
 
         private void Update_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -97,15 +107,16 @@ namespace Game_Launcher
 
         private void UpdateLauncherMenuVisibility()
         {
-            UpdateLauncherMenuItem.Visibility =
-        LauncherUpdateManager.UpdateAvailable
-            ? Visibility.Visible
-            : Visibility.Collapsed;
-
             if (LauncherUpdateManager.UpdateAvailable)
             {
-                UpdateLauncherMenuItem.Header =
-                    $"Update Launcher ({LauncherUpdateManager.RemoteVersion})";
+                UpdateLauncherMenuItem.Header = $"Update Launcher ({LauncherUpdateManager.RemoteVersion})";
+                UpdateLauncherMenuItem.Visibility = Visibility.Visible;
+                UpdateBadge.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                UpdateLauncherMenuItem.Visibility = Visibility.Collapsed;
+                UpdateBadge.Visibility = Visibility.Collapsed;
             }
         }
 

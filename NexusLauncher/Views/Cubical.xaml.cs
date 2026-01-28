@@ -1,6 +1,7 @@
 ﻿using Game_Launcher.Core;
 using System;
 using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -21,6 +22,7 @@ namespace Game_Launcher.Views
 
         // NEEDED ASSETS
         public override Button PlayButton => Play_Button;
+        public override Button LocateButton => Locate_Button;
         public override Button OptionButton => OptionsButton;
         public override ProgressBar ProgressBar => Download_ProgressBar;
         public override TextBlock ProgressLabel => Progress_Label;
@@ -31,7 +33,7 @@ namespace Game_Launcher.Views
         public override SolidColorBrush DefaultTextColor => Brushes.White;
         public override SolidColorBrush DisabledTextColor => Brushes.Gray;
 
-        private void PlayButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private async void PlayButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             switch (Status)
             {
@@ -39,13 +41,20 @@ namespace Game_Launcher.Views
                     Launch();
                     break;
                 case GameInstallStatus.install:
+                    await InstallAsync(false);
+                    break;
                 case GameInstallStatus.update:
-                    Install(Status == GameInstallStatus.update);
+                    await InstallAsync(true);
                     break;
                 case GameInstallStatus.failed:
                     CheckForUpdates();
                     break;
             }
+        }
+
+        private void LocateButton_Click(object sender, RoutedEventArgs e)
+        {
+            LocateGame();
         }
 
         private void OptionsButton_Click(object sender, System.Windows.RoutedEventArgs e)

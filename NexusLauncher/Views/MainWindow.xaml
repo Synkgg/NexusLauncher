@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="Launcher"
         Height="576" Width="1080"
-        MinHeight="576" MinWidth="900"
+        MinHeight="576" MinWidth="1080"
         WindowStartupLocation="CenterScreen"
         ContentRendered="Window_ContentRendered"
         WindowStyle="None"
@@ -37,7 +37,6 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="5"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -48,26 +47,65 @@
 
         <Grid Grid.ColumnSpan="7" Background="#FF141C25" Name="MenuGrid">
 
+            <!-- Update notification icon -->
+
+
+
             <Button x:Name="LogoButton"
-                    HorizontalAlignment="Left"
-                    Height="50" Width="60"
-                    Margin="50,0,0,0"
-                    VerticalAlignment="Center"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    Click="LogoButton_Click">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="/Images/nexus.png"/>
-                    <TextBlock Text="⌄" FontSize="15" VerticalAlignment="Center" Foreground="White"></TextBlock>
-                </StackPanel>
+        HorizontalAlignment="Left"
+        Height="50" Width="60"
+        Margin="50,0,0,0"
+        VerticalAlignment="Center"
+        Background="Transparent"
+        BorderThickness="0"
+        Click="LogoButton_Click">
+
+                <Grid>
+                    <!-- Logo Image -->
+                    <Image Source="/Images/nexus.png" Stretch="Uniform"/>
+
+                    <!-- Update badge -->
+                    <Border x:Name="UpdateBadge"
+                Width="14" Height="14"
+                Background="OrangeRed"
+                CornerRadius="7"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,-3,-3,0"
+                Visibility="Collapsed">
+                        <TextBlock Text="!" 
+                       FontSize="10" 
+                       FontWeight="Bold" 
+                       Foreground="White"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"/>
+                    </Border>
+                    
+                    <TextBlock Text="⌄" FontSize="15"  HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="50,0,0,0" Foreground="White"></TextBlock>
+                </Grid>
+
                 <Button.ContextMenu>
-                    <ContextMenu x:Name="LogoOptionsMenu">
-                        <MenuItem Header="Settings" Click="Settings_Click"/>
-                        <MenuItem x:Name="UpdateLauncherMenuItem" Header="Update Launcher" Click="Update_Click" Visibility="Collapsed"/>
+                    <ContextMenu Style="{StaticResource LauncherContextMenuStyle}" StaysOpen="True">
+                        <MenuItem Header="Settings"
+                      Style="{StaticResource LauncherMenuItemStyle}" Click="Settings_Click">
+                            <MenuItem.Icon>
+                                <Image Source="/Images/Icons/settings.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+
+                        <Separator HorizontalAlignment="Stretch"/>
+
+                        <MenuItem Header="Update Launcher"
+                      Style="{StaticResource LauncherMenuItemStyle}"
+                      x:Name="UpdateLauncherMenuItem" Click="Update_Click" Visibility="Collapsed">
+                            <MenuItem.Icon>
+                                <Image Source="/Images/Icons/update.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </Button.ContextMenu>
             </Button>
-            
+
 
             <StackPanel Margin="115,0,0,0" Orientation="Horizontal">
                 <StackPanel.Resources>
@@ -128,7 +166,7 @@
             </StackPanel>
         </Grid>
 
-        <Button x:Name="btnMinimize" Content="—" Foreground="White" FontSize="16" FontFamily="Montserrat" Cursor="Hand" Grid.Column="2" Height="20" VerticalAlignment="Top" Click="btnMinimize_Click">
+        <Button x:Name="btnMinimize" Content="–" Foreground="White" FontSize="16" FontFamily="Montserrat" Cursor="Hand" Grid.Column="2" Height="30" VerticalAlignment="Top" Click="btnMinimize_Click">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Background" Value="Transparent"/>
@@ -151,7 +189,7 @@
 
         </Button>
 
-        <Button x:Name="btnFullscreen" Content="🗖" Foreground="White" FontSize="16" FontFamily="Montserrat" Cursor="Hand" Grid.Column="3" Height="20" VerticalAlignment="Top" Click="btnFullscreen_Click">
+        <Button x:Name="btnFullscreen" Content="🗖" Foreground="White" FontSize="16" FontFamily="Montserrat" Cursor="Hand" Grid.Column="3" Height="30" VerticalAlignment="Top" Click="btnFullscreen_Click">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Background" Value="Transparent"/>
@@ -174,7 +212,7 @@
 
         </Button>
 
-        <Button x:Name="btnClose" BorderThickness="0" Content="✖" Foreground="White" FontSize="16" FontFamily="Montserrat" Cursor="Hand" Grid.Column="4" Height="20" VerticalAlignment="Top" Click="btnClose_Click">
+        <Button x:Name="btnClose" BorderThickness="0" Content="🗙" Foreground="White" FontSize="16" FontFamily="Montserrat" Cursor="Hand" Grid.Column="4" Height="30" VerticalAlignment="Top" Click="btnClose_Click">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Background" Value="Transparent"/>

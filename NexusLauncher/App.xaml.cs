@@ -14,6 +14,7 @@ namespace NexusLauncher
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            SettingsManager.Load();
             LauncherUpdateManager.CheckForUpdate();
         }
 
